@@ -10,6 +10,7 @@ public class PuckMovement : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private TextMeshProUGUI playerScoreText;
     [SerializeField] private TextMeshProUGUI opponentScoreText;
+    private AudioSource audioSource;
     private Rigidbody2D puckRigidbody;
     private float xSlope, ySlope;
     private int opponentScore, playerScore;
@@ -18,6 +19,7 @@ public class PuckMovement : MonoBehaviour
     void Start()
     {
         puckRigidbody = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
 
         initialPuckPosition = transform.position;
         initialPlayerPosition = player.transform.position;
@@ -42,7 +44,8 @@ public class PuckMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D otherCollider)
     {
-        Debug.Log("Collision with " + otherCollider.name);
+        // Debug.Log("Collision with " + otherCollider.name);
+        audioSource.Play();
         switch (otherCollider.name)
         {
             case "ColliderUp":
